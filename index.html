@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="[Natalie Schultz]">
+    <title>Magic Eight Ball</title>
+    <style>
+        body {
+            background: #22223b;
+            color: #f2e9e4;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .eight-ball {
+            margin-top: 60px;
+            background: radial-gradient(circle at 30% 30%, #393552 80%, #231942 100%);
+            border-radius: 50%;
+            width: 210px;
+            height: 210px;
+            box-shadow: 0 10px 30px rgba(34, 34, 59, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window {
+            background: #ffffffb0;
+            border-radius: 20px;
+            width: 150px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #231942;
+            font-size: 1.22rem;
+            font-weight: bold;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .question {
+            margin-top: 38px;
+            background: #4a4e69;
+            border-radius: 14px;
+            padding: 16px 22px;
+            display: block;
+            min-width: 280px;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 7px rgba(34, 34, 59, 0.1);
+        }
+
+        .thanks {
+            margin-top: 40px;
+            font-size: 1.13rem;
+            color: #c9ada7;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="margin-top:26px;">Magic Eight Ball</h1>
+    <div class="eight-ball">
+        <div id="response-window" class="window">
+            Ask me anything!
+        </div>
+    </div>
+    <div id="question-box" class="question"></div>
+    <div id="thankyou" class="thanks"></div>
+    <script>
+        // 1. Responses array: (eight responses, you may edit for creativity)
+        var responses = [
+            "Yes, definitely.",
+            "No, certainly not.",
+            "Ask again later.",
+            "It is very likely.",
+            "Doubtful, try again.",
+            "Yes, count on it.",
+            "No, do not count on it.",
+            "My sources say yes."
+        ];
+
+        // 2. Posttest loop: repeat at least once
+        var continuePlaying;
+        do {
+            // Prompt for the user's question
+            var question = prompt("Ask the Magic Eight Ball Any 'yes' or 'no' question.");
+            // If user cancels prompt, stop the program
+            if (question === null) {
+                continuePlaying = "no";
+                break;
+            }
+
+            // Display user question on page
+            document.getElementById("question-box").innerHTML = "<b>You asked:</b> " + question;
+
+            // Get random index 0-7
+            var randomIndex = Math.floor(Math.random() * 8);
+
+            // Display magic eight ball response in the window
+            document.getElementById("response-window").textContent = responses[randomIndex];
+
+            // Prompt user to play again
+            continuePlaying = prompt("Would you like to ask another question? (yes or no)").toLowerCase();
+            // If user cancels prompt, treat as "no"
+            if (continuePlaying === null) {
+                continuePlaying = "no";
+            }
+        } while (continuePlaying === "yes");
+
+        // When finished, thank the user
+        document.getElementById("thankyou").textContent = "Thank you for playing with the Magic Eight Ball!";
+    </script>
+</body>
+</html>
+
